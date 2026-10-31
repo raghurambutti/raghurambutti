@@ -67,9 +67,9 @@ const EXPERIENCE = [
 ];
 
 const FOCUS = [
-  { title: "Prior Authorization Review Copilot", body: "Three-agent LangGraph prototype that reads prior-auth packets, extracts clinical facts with citation-checked quotes from Claude, checks them against policy and gives nurses a one-page brief. The AI never approves or denies; PHI masking, prompt-injection filtering and a SHA-256 hash-chained audit log built in.", stack: ["LangGraph", "Claude", "Streamlit", "pytest"] },
-  { title: "Ola AI Data Agent", body: "Multi-agent assistant that routes plain-English questions to a SQL Analyst or ETL Analyst. Generated SQL passes an LLM judge, then runs read-only with a 15s timeout. 61,073 sample rows, 28 pytest tests in GitHub Actions.", stack: ["LangGraph", "PostgreSQL", "Pydantic", "GitHub Actions"] },
-  { title: "FACTS Transmission Protection", body: "Real-time fault detection for power-grid infrastructure, deploying predictive models via SageMaker and IoT Core for autonomous grid protection.", stack: ["MATLAB", "AWS Lambda", "SageMaker", "IoT Core"] },
+  { title: "Prior Authorization Review Copilot", body: "Three-agent LangGraph prototype that reads prior-auth packets, extracts clinical facts with citation-checked quotes from Claude, checks them against policy and gives nurses a one-page brief. The AI never approves or denies; PHI masking, prompt-injection filtering and a SHA-256 hash-chained audit log built in.", stack: ["LangGraph", "Claude", "Streamlit", "pytest"], repo: "https://github.com/raghurambutti/Insurancecase" },
+  { title: "Ola AI Data Agent", body: "Multi-agent assistant that routes plain-English questions to a SQL Analyst or ETL Analyst. Generated SQL passes an LLM judge, then runs read-only with a 15s timeout. 61,073 sample rows, 28 pytest tests in GitHub Actions.", stack: ["LangGraph", "PostgreSQL", "Pydantic", "GitHub Actions"], repo: "https://github.com/raghurambutti/Ola_Data_Agent" },
+  { title: "FACTS Transmission Protection", body: "Real-time fault detection for power-grid infrastructure, deploying predictive models via SageMaker and IoT Core for autonomous grid protection.", stack: ["MATLAB", "AWS Lambda", "SageMaker", "IoT Core"], repo: "" },
 ];
 
 const EDUCATION = [
@@ -333,6 +333,16 @@ function Focus() {
             <div className="mt-6 flex gap-3 font-mono text-xs text-muted-foreground">
               {f.stack.map((s) => <span key={s}>#{s}</span>)}
             </div>
+            {f.repo && (
+              <a
+                href={f.repo}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-accent underline-offset-4 transition-colors hover:underline"
+              >
+                View the code <span aria-hidden="true">→</span>
+              </a>
+            )}
           </article>
         ))}
       </div>
