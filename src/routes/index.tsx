@@ -169,7 +169,7 @@ function NeuralField() {
 }
 
 function Hero() {
-  const resumeHref = SITE.resumeUrl || `mailto:${SITE.email}?subject=Resume%20request`;
+  const resumeHref = SITE.resumeUrl;
   return (
     <section id="top" className="relative flex min-h-screen items-center pt-24">
       <div className="pointer-events-none absolute inset-0 bg-glow" />
@@ -193,7 +193,7 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#projects" className="rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">View My Projects</a>
-            <a href={resumeHref} className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
+            <a href={resumeHref} download="Raghuram_Butti_Resume.pdf" target="_blank" rel="noreferrer" className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
             <a href="#contact" className="rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">Let's Connect →</a>
           </div>
           <div className="mt-10 flex gap-3">
