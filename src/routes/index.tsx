@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 // Edit these values to update links and status across the site.
 const SITE = {
@@ -8,7 +9,7 @@ const SITE = {
   phone: "+1 630-742-0988",
   linkedin: "https://www.linkedin.com/in/raghuram321",
   github: "https://github.com/raghurambutti",
-  resumeUrl: "",
+  resumeUrl: resumeAsset.url,
   available: true,
   availability: "Open to Data Engineering & AI roles",
 };
@@ -55,11 +56,6 @@ const EXPERIENCE = [
     "Real-time and batch pipelines with Kafka, Hadoop and Apache Flink for retail analytics.",
     "ReactJS/TypeScript front-ends delivering Power BI and QuickSight analytics to business users.",
     "Automated CI/CD with Jenkins, Terraform and Azure DevOps into Azure Data Lake and Snowflake.",
-  ]},
-  { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer", when: "Sep 2021 – Jun 2023", points: [
-    "High-performance pipelines with Kafka, Azure Synapse and Databricks.",
-    "Led migration from on-prem SQL Server to Azure Data Lake and Snowflake with minimal downtime.",
-    "CI/CD pipelines with Git, Terraform, Jenkins and Azure DevOps; Tableau and Power BI reporting.",
   ]},
   { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer — Internship", when: "Mar 2021 – Aug 2021", points: [
     "Supported pipeline builds, SQL Server to Azure/Snowflake migration and CI/CD automation.",
