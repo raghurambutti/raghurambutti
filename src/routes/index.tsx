@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 // Edit these values to update links and status across the site.
 const SITE = {
@@ -8,7 +9,7 @@ const SITE = {
   phone: "+1 630-742-0988",
   linkedin: "https://www.linkedin.com/in/raghuram321",
   github: "https://github.com/raghurambutti",
-  resumeUrl: "",
+  resumeUrl: resumeAsset.url,
   available: true,
   availability: "Open to Data Engineering & AI roles",
 };
@@ -55,11 +56,6 @@ const EXPERIENCE = [
     "Real-time and batch pipelines with Kafka, Hadoop and Apache Flink for retail analytics.",
     "ReactJS/TypeScript front-ends delivering Power BI and QuickSight analytics to business users.",
     "Automated CI/CD with Jenkins, Terraform and Azure DevOps into Azure Data Lake and Snowflake.",
-  ]},
-  { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer", when: "Sep 2021 – Jun 2023", points: [
-    "High-performance pipelines with Kafka, Azure Synapse and Databricks.",
-    "Led migration from on-prem SQL Server to Azure Data Lake and Snowflake with minimal downtime.",
-    "CI/CD pipelines with Git, Terraform, Jenkins and Azure DevOps; Tableau and Power BI reporting.",
   ]},
   { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer — Internship", when: "Mar 2021 – Aug 2021", points: [
     "Supported pipeline builds, SQL Server to Azure/Snowflake migration and CI/CD automation.",
@@ -173,7 +169,7 @@ function NeuralField() {
 }
 
 function Hero() {
-  const resumeHref = SITE.resumeUrl || `mailto:${SITE.email}?subject=Resume%20request`;
+  const resumeHref = SITE.resumeUrl;
   return (
     <section id="top" className="relative flex min-h-screen items-center pt-24">
       <div className="pointer-events-none absolute inset-0 bg-glow" />
@@ -197,7 +193,7 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#projects" className="rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">View My Projects</a>
-            <a href={resumeHref} className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
+            <a href={resumeHref} download="Raghuram_Butti_Resume.pdf" target="_blank" rel="noreferrer" className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
             <a href="#contact" className="rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">Let's Connect →</a>
           </div>
           <div className="mt-10 flex gap-3">
