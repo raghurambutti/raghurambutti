@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Portfolio layout
+- Keep the portfolio in its single content route, with mobile-first section spacing and shared Button controls for project and resume actions; this preserves the existing one-page experience across screen sizes.
