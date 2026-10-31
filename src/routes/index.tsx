@@ -7,7 +7,7 @@ const SITE = {
   email: "raghurambutti169@gmail.com",
   phone: "+1 630-742-0988",
   linkedin: "https://www.linkedin.com/in/raghuram321",
-  github: "https://github.com/",
+  github: "https://github.com/raghurambutti",
   resumeUrl: "",
   available: true,
   availability: "Open to Data Engineering & AI roles",
