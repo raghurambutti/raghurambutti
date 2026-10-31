@@ -4,21 +4,22 @@ import { useEffect, useState } from "react";
 // Edit these values to update links and status across the site.
 const SITE = {
   name: "Raghuram Butti",
-  email: "hello@example.com",
-  linkedin: "https://www.linkedin.com/",
+  email: "raghurambutti169@gmail.com",
+  phone: "+1 630-742-0988",
+  linkedin: "https://www.linkedin.com/in/raghuram321",
   github: "https://github.com/",
-  resumeUrl: "", // e.g. "/resume.pdf" — when empty, the button requests it by email
+  resumeUrl: "",
   available: true,
-  availability: "Open to senior AI engineering roles",
+  availability: "Open to Data Engineering & AI roles",
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Raghuram Butti — Senior AI Engineer | Generative & Agentic AI" },
-      { name: "description", content: "Senior AI Engineer and LLM Architect with 12+ years building production-grade Generative AI, Agentic AI, RAG and ML systems." },
-      { property: "og:title", content: "Raghuram Butti — Senior AI Engineer" },
-      { property: "og:description", content: "Engineering intelligent systems. Generative AI, Agentic AI, LLM architecture and enterprise ML." },
+      { title: "Raghuram Butti — Data Engineer & AI Agent Builder" },
+      { name: "description", content: "Data Engineer with 4+ years building ETL/ELT pipelines on AWS, Azure and Snowflake, plus multi-agent LLM systems with LangGraph and Claude." },
+      { property: "og:title", content: "Raghuram Butti — Data Engineer & AI Agent Builder" },
+      { property: "og:description", content: "Scalable data pipelines at Elevance Health, Visa and Target, and agentic AI prototypes with LangGraph and Claude." },
     ],
   }),
   component: Index,
@@ -26,29 +27,63 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   ["About", "about"],
-  ["Expertise", "expertise"],
-  ["Focus", "focus"],
+  ["Experience", "experience"],
+  ["Projects", "projects"],
+  ["Skills", "expertise"],
   ["Contact", "contact"],
 ] as const;
 
 const SKILLS: { title: string; tag: string; items: string[] }[] = [
-  { title: "Generative AI", tag: "01", items: ["GPT", "Transformers", "LLMs", "Claude", "RAG", "GraphRAG", "LangChain", "LangGraph", "Agentic AI", "Multi-Agent Systems"] },
-  { title: "Machine Learning", tag: "02", items: ["Python", "TensorFlow", "PyTorch", "Keras", "Scikit-learn", "NLP", "Computer Vision", "CNNs"] },
-  { title: "Cloud Platforms", tag: "03", items: ["AWS", "Azure", "Google Cloud Platform"] },
-  { title: "AI & ML Platforms", tag: "04", items: ["AWS Bedrock", "SageMaker", "Azure ML", "Vertex AI", "Databricks", "MLflow"] },
-  { title: "Backend & Development", tag: "05", items: ["FastAPI", "REST APIs", "Microservices", "SQL", "Docker", "Kubernetes"] },
-  { title: "Data Engineering", tag: "06", items: ["Spark", "PySpark", "Kafka", "Airflow", "Delta Lake", "Data Pipelines"] },
-  { title: "MLOps & Deployment", tag: "07", items: ["CI/CD", "Model Optimization", "Quantization", "Model Serving", "Monitoring", "Responsible AI"] },
+  { title: "Languages & Querying", tag: "01", items: ["Python", "SQL", "PySpark", "JavaScript", "TypeScript"] },
+  { title: "Cloud Platforms", tag: "02", items: ["AWS S3", "Glue", "Athena", "Lambda", "Redshift", "EMR", "IAM", "Azure ADLS", "Synapse", "Snowflake", "GCP"] },
+  { title: "Data Engineering", tag: "03", items: ["ETL/ELT Pipelines", "API Integrations", "Data Modeling", "Data Warehousing", "Data Quality", "Data Governance"] },
+  { title: "Big Data & Streaming", tag: "04", items: ["Apache Spark", "Kafka", "Hadoop", "Apache Flink", "Databricks", "Airflow"] },
+  { title: "AI & Agents", tag: "05", items: ["LangGraph", "LangChain", "Claude", "Pydantic", "Streamlit", "SageMaker"] },
+  { title: "DevOps & CI/CD", tag: "06", items: ["Git", "Docker", "Kubernetes", "Jenkins", "Terraform", "Azure DevOps", "GitHub Actions"] },
+  { title: "Monitoring & Visualization", tag: "07", items: ["Dynatrace", "Splunk", "KMS", "Power BI", "Tableau", "QuickSight"] },
+];
+
+const EXPERIENCE = [
+  { company: "Elevance Health", place: "GA · Remote", role: "Data Engineer", when: "Apr 2025 – Present", points: [
+    "Design and maintain ETL/ELT pipelines in Python, PySpark and SQL with AWS Glue, loading large datasets into Redshift and Snowflake.",
+    "Integrate S3, Glue, Athena and Lambda with Palantir Foundry through reusable data connections.",
+    "Automated recurring workflows with Python, Control-M and Airflow — 40% better processing efficiency.",
+    "End-to-end monitoring with Dynatrace and Splunk; dashboards in Power BI, QuickSight and Foundry Workshop.",
+  ]},
+  { company: "Visa", place: "MO · Remote", role: "Data Engineer", when: "Aug 2023 – Mar 2025", points: [
+    "Built ETL workflows in Python, PySpark, Java and Scala loading curated data into Snowflake and Redshift.",
+    "Real-time and batch pipelines with Kafka, Hadoop and Apache Flink for retail analytics.",
+    "ReactJS/TypeScript front-ends delivering Power BI and QuickSight analytics to business users.",
+    "Automated CI/CD with Jenkins, Terraform and Azure DevOps into Azure Data Lake and Snowflake.",
+  ]},
+  { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer", when: "Sep 2021 – Jun 2023", points: [
+    "High-performance pipelines with Kafka, Azure Synapse and Databricks.",
+    "Led migration from on-prem SQL Server to Azure Data Lake and Snowflake with minimal downtime.",
+    "CI/CD pipelines with Git, Terraform, Jenkins and Azure DevOps; Tableau and Power BI reporting.",
+  ]},
+  { company: "Target", place: "Bengaluru · Onsite", role: "Data Engineer — Internship", when: "Mar 2021 – Aug 2021", points: [
+    "Supported pipeline builds, SQL Server to Azure/Snowflake migration and CI/CD automation.",
+  ]},
 ];
 
 const FOCUS = [
-  { title: "Agentic & Multi-Agent Systems", body: "Orchestrating tool-using agents with LangGraph — planning, memory, guardrails and human-in-the-loop checkpoints designed for enterprise workflows.", stack: ["LangGraph", "LangChain", "FastAPI"] },
-  { title: "Advanced RAG & GraphRAG", body: "Retrieval pipelines that go beyond naive vector search: hybrid retrieval, re-ranking, knowledge graphs and evaluation built into the loop.", stack: ["Vector DBs", "GraphRAG", "Bedrock"] },
-  { title: "LLM Fine-Tuning & Optimization", body: "Adapting transformer models to domain data, then making them practical to run through quantization and efficient serving.", stack: ["PyTorch", "Transformers", "SageMaker"] },
-  { title: "Production MLOps", body: "Taking models from notebook to dependable service — versioning, CI/CD, containerised deployment and monitoring at scale.", stack: ["MLflow", "Databricks", "Kubernetes"] },
+  { title: "Prior Authorization Review Copilot", body: "Three-agent LangGraph prototype that reads prior-auth packets, extracts clinical facts with citation-checked quotes from Claude, checks them against policy and gives nurses a one-page brief. The AI never approves or denies; PHI masking, prompt-injection filtering and a SHA-256 hash-chained audit log built in.", stack: ["LangGraph", "Claude", "Streamlit", "pytest"] },
+  { title: "Ola AI Data Agent", body: "Multi-agent assistant that routes plain-English questions to a SQL Analyst or ETL Analyst. Generated SQL passes an LLM judge, then runs read-only with a 15s timeout. 61,073 sample rows, 28 pytest tests in GitHub Actions.", stack: ["LangGraph", "PostgreSQL", "Pydantic", "GitHub Actions"] },
+  { title: "FACTS Transmission Protection", body: "Real-time fault detection for power-grid infrastructure, deploying predictive models via SageMaker and IoT Core for autonomous grid protection.", stack: ["MATLAB", "AWS Lambda", "SageMaker", "IoT Core"] },
 ];
 
-const INDUSTRIES = ["Healthcare", "Financial Services", "Retail", "Telecommunications", "Transportation"];
+const EDUCATION = [
+  ["Master of Science, Information Systems and Management", "Saint Louis, USA · Mar 2023"],
+  ["Bachelor of Engineering", "Kakatiya Institute of Technology and Science, India · Jun 2022"],
+];
+const CERTS = [
+  "Google Cloud Professional Machine Learning Engineer · Jan 2026",
+  "Google Cloud Professional Cloud Developer · Oct 2026",
+  "AWS Certified Cloud Practitioner",
+  "Generative AI — Coursera",
+];
+
+const INDUSTRIES = ["Healthcare", "Payments", "Retail"];
 
 function useReveal() {
   useEffect(() => {
@@ -69,8 +104,10 @@ function Index() {
       <Header />
       <Hero />
       <About />
-      <Expertise />
+      <Experience />
       <Focus />
+      <Expertise />
+      <Education />
       <Contact />
       <footer className="border-t py-10 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} {SITE.name}. Built with care.
@@ -151,15 +188,15 @@ function Hero() {
             {SITE.availability}
           </div>
           <p className="font-mono text-sm tracking-[0.3em] text-accent">RAGHURAM BUTTI</p>
-          <p className="mt-3 text-sm text-muted-foreground">Senior AI Engineer · Generative AI · Agentic AI · LLM Architect</p>
+          <p className="mt-3 text-sm text-muted-foreground">Data Engineer · AWS & GCP Certified · Agentic AI Builder</p>
           <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-            Engineering Intelligent Systems. <span className="text-gradient">Transforming Ideas into Production-Ready AI.</span>
+            Reliable data pipelines. <span className="text-gradient">Grounded AI agents on top.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            I design and build enterprise-grade AI solutions that combine Generative AI, Agentic Systems, Machine Learning, and scalable cloud architecture to solve real-world business challenges.
+            4+ years building ETL/ELT pipelines on AWS, Azure and Snowflake at Elevance Health, Visa and Target — and multi-agent LLM systems with LangGraph and Claude that stay safe, cited and auditable.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#focus" className="rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">View My Projects</a>
+            <a href="#projects" className="rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">View My Projects</a>
             <a href={resumeHref} className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
             <a href="#contact" className="rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">Let's Connect →</a>
           </div>
@@ -192,22 +229,16 @@ function SectionHead({ k, title }: { k: string; title: string }) {
 }
 
 function About() {
-  const stats = [["12+", "Years in AI, ML & Data Science"], ["5", "Industries served"], ["E2E", "Full AI lifecycle ownership"]];
+  const stats = [["4+", "Years in data engineering"], ["40%", "Efficiency gain via workflow automation"], ["4", "AWS & Google Cloud certifications"]];
   return (
     <section id="about" className="mx-auto max-w-6xl px-6 py-32">
-      <SectionHead k="// ABOUT" title="Building AI that holds up in production." />
+      <SectionHead k="// ABOUT" title="Data that's clean, governed and ready for AI." />
       <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
         <div className="reveal space-y-6 text-lg leading-relaxed text-muted-foreground">
-          <p>
-            For more than twelve years I've worked across artificial intelligence, machine learning and data science — from classical modelling and computer vision to today's large language models and agentic systems.
-          </p>
-          <p>
-            My focus is the full lifecycle: framing the business problem, shaping the data, designing the architecture, and shipping models that stay reliable once real users depend on them. I work closely with cross-functional teams and enterprise stakeholders to turn ambitious ideas into scalable, maintainable intelligent applications.
-          </p>
+          <p>I'm a Data Engineer with 4+ years of experience and a Master's in Information Systems and Management. I design scalable ETL/ELT pipelines in Python, PySpark and SQL across AWS, Azure and Snowflake, with monitoring and security built in.</p>
+          <p>Lately I've been building agentic AI on top of that foundation: a three-agent LangGraph copilot for healthcare prior authorization with citation-checked extraction using Claude, and a multi-agent data assistant that answers plain-English questions with safety-checked SQL on PostgreSQL.</p>
           <div className="flex flex-wrap gap-2 pt-2">
-            {INDUSTRIES.map((i) => (
-              <span key={i} className="rounded-full border px-3 py-1 text-sm text-foreground">{i}</span>
-            ))}
+            {INDUSTRIES.map((i) => (<span key={i} className="rounded-full border px-3 py-1 text-sm text-foreground">{i}</span>))}
           </div>
         </div>
         <div className="reveal grid gap-4">
@@ -223,12 +254,51 @@ function About() {
   );
 }
 
+function Experience() {
+  return (
+    <section id="experience" className="mx-auto max-w-6xl px-6 py-32">
+      <SectionHead k="// EXPERIENCE" title="Where I've shipped." />
+      <ol className="relative space-y-10 border-l pl-8">
+        {EXPERIENCE.map((e) => (
+          <li key={e.company + e.when} className="reveal relative">
+            <span className="absolute -left-[37px] top-2 h-3 w-3 rounded-full bg-accent shadow-glow" />
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-2xl font-semibold">{e.company} <span className="text-base font-normal text-muted-foreground">· {e.role}</span></h3>
+              <span className="font-mono text-xs text-accent">{e.when}</span>
+            </div>
+            <p className="mt-1 text-sm text-muted-foreground">{e.place}</p>
+            <ul className="mt-4 space-y-2 text-muted-foreground">
+              {e.points.map((p) => (<li key={p} className="leading-relaxed">— {p}</li>))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Education() {
+  return (
+    <section id="education" className="mx-auto max-w-6xl px-6 py-32">
+      <SectionHead k="// EDUCATION & CERTIFICATIONS" title="Credentials." />
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="reveal space-y-4 rounded-2xl glass p-7">
+          {EDUCATION.map(([d, w]) => (<div key={d}><h3 className="font-semibold">{d}</h3><p className="text-sm text-muted-foreground">{w}</p></div>))}
+        </div>
+        <ul className="reveal space-y-3 rounded-2xl glass p-7">
+          {CERTS.map((c) => (<li key={c} className="text-sm"><span className="text-accent">✓</span> {c}</li>))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 function Expertise() {
   return (
     <section id="expertise" className="relative py-32">
       <div className="pointer-events-none absolute inset-0 bg-glow opacity-60" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <SectionHead k="// TECHNICAL EXPERTISE" title="The stack behind the systems." />
+        <SectionHead k="// CORE SKILLS" title="The stack behind the systems." />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {SKILLS.map((s, idx) => (
             <div key={s.title} style={{ transitionDelay: `${idx * 60}ms` }}
@@ -252,8 +322,8 @@ function Expertise() {
 
 function Focus() {
   return (
-    <section id="focus" className="mx-auto max-w-6xl px-6 py-32">
-      <SectionHead k="// WHAT I BUILD" title="Areas of focus." />
+    <section id="projects" className="mx-auto max-w-6xl px-6 py-32">
+      <SectionHead k="// PROJECTS" title="Agentic AI, built carefully." />
       <div className="grid gap-px overflow-hidden rounded-2xl border bg-border md:grid-cols-2">
         {FOCUS.map((f, i) => (
           <article key={f.title} className="reveal bg-background p-8 transition-colors hover:bg-card sm:p-10">
@@ -285,7 +355,7 @@ function Contact() {
         <div className="reveal">
           <p className="font-mono text-xs tracking-[0.3em] text-accent">// CONTACT</p>
           <h2 className="mt-3 text-3xl font-semibold sm:text-5xl">Let's build something <span className="text-gradient">intelligent.</span></h2>
-          <p className="mt-6 max-w-md text-lg text-muted-foreground">Hiring for a senior AI role, or exploring a Generative AI initiative? I'd be glad to hear about it.</p>
+          <p className="mt-6 max-w-md text-lg text-muted-foreground">Hiring for a data engineering or AI role? Reach me at {SITE.email} or {SITE.phone}.</p>
           <div className="mt-8 flex gap-3">
             <Social href={SITE.linkedin} label="LinkedIn"><LinkedInIcon /></Social>
             <Social href={SITE.github} label="GitHub"><GitHubIcon /></Social>
