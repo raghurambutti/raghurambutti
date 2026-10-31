@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { ArrowRight, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 // Edit these values to update links and status across the site.
@@ -21,6 +23,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Data Engineer with 4+ years building ETL/ELT pipelines on AWS, Azure and Snowflake, plus multi-agent LLM systems with LangGraph and Claude." },
       { property: "og:title", content: "Raghuram Butti — Data Engineer & AI Agent Builder" },
       { property: "og:description", content: "Scalable data pipelines at Elevance Health, Visa and Target, and agentic AI prototypes with LangGraph and Claude." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -153,11 +157,14 @@ function NeuralField() {
           <stop offset="1" stopColor="var(--violet)" />
         </linearGradient>
       </defs>
-      {links.map(([a, b], i) => (
-        <line key={i} x1={nodes[a]![0]} y1={nodes[a]![1]} x2={nodes[b]![0]} y2={nodes[b]![1]}
+      {links.map(([a, b], i) => {
+        const start = nodes[a];
+        const end = nodes[b];
+        if (!start || !end) return null;
+        return <line key={i} x1={start[0]} y1={start[1]} x2={end[0]} y2={end[1]}
           stroke="url(#lg)" strokeWidth="1.2" strokeOpacity=".55" className="animate-flow"
-          style={{ animationDelay: `${i * 0.15}s` }} />
-      ))}
+          style={{ animationDelay: `${i * 0.15}s` }} />;
+      })}
       {nodes.map(([x, y], i) => (
         <g key={i}>
           <circle cx={x} cy={y} r="10" fill="var(--accent)" opacity=".08" />
@@ -171,32 +178,32 @@ function NeuralField() {
 function Hero() {
   const resumeHref = SITE.resumeUrl;
   return (
-    <section id="top" className="relative flex min-h-screen items-center pt-24">
+    <section id="top" className="relative flex items-center pb-12 pt-28 sm:min-h-screen sm:pb-16 sm:pt-24">
       <div className="pointer-events-none absolute inset-0 bg-glow" />
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-60" />
       <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[60%] opacity-70 lg:block">
         <NeuralField />
       </div>
-      <div className="relative mx-auto w-full max-w-6xl px-6">
+      <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-6">
         <div className="max-w-2xl animate-rise">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs text-muted-foreground">
-            <span className={`h-2 w-2 rounded-full ${SITE.available ? "bg-success animate-pulse" : "bg-muted-foreground"}`} />
+          <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full glass px-3 py-2 text-xs text-muted-foreground sm:mb-8">
+            <span className={`h-2 w-2 shrink-0 rounded-full ${SITE.available ? "bg-success animate-pulse" : "bg-muted-foreground"}`} />
             {SITE.availability}
           </div>
           <p className="font-mono text-sm tracking-[0.3em] text-accent">RAGHURAM BUTTI</p>
           <p className="mt-3 text-sm text-muted-foreground">Data Engineer · AWS & GCP Certified · Agentic AI Builder</p>
-          <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
+          <h1 className="mt-5 text-3xl font-bold leading-[1.15] sm:mt-6 sm:text-6xl sm:leading-[1.08]">
             Reliable data pipelines. <span className="text-gradient">Grounded AI agents on top.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">
             4+ years building ETL/ELT pipelines on AWS, Azure and Snowflake at Elevance Health, Visa and Target — and multi-agent LLM systems with LangGraph and Claude that stay safe, cited and auditable.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#projects" className="rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">View My Projects</a>
-            <a href={resumeHref} download="Raghuram_Butti_Resume.pdf" target="_blank" rel="noreferrer" className="rounded-full glass px-6 py-3 text-sm font-semibold transition-colors hover:border-accent">Download Resume</a>
-            <a href="#contact" className="rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">Let's Connect →</a>
+          <div className="mt-8 grid min-w-0 gap-3 sm:mt-10 sm:flex sm:flex-wrap sm:items-center">
+            <Button asChild className="h-auto min-h-12 w-full whitespace-normal rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 sm:w-auto"><a href="#projects">View My Projects <ArrowRight aria-hidden="true" /></a></Button>
+            <Button asChild variant="outline" className="h-auto min-h-12 w-full whitespace-normal rounded-full glass px-6 py-3 text-sm font-semibold hover:border-accent hover:bg-card hover:text-foreground sm:w-auto"><a href={resumeHref} download="Raghuram_Butti_Resume.pdf" target="_blank" rel="noreferrer"><Download aria-hidden="true" /> Download Resume</a></Button>
+            <Button asChild variant="ghost" className="h-auto min-h-12 w-full whitespace-normal rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground hover:bg-card hover:text-foreground sm:w-auto"><a href="#contact">Let's Connect <ArrowRight aria-hidden="true" /></a></Button>
           </div>
-          <div className="mt-10 flex gap-3">
+          <div className="mt-6 flex gap-3 sm:mt-10">
             <Social href={SITE.linkedin} label="LinkedIn"><LinkedInIcon /></Social>
             <Social href={SITE.github} label="GitHub"><GitHubIcon /></Social>
           </div>
@@ -217,9 +224,9 @@ function Social({ href, label, children }: { href: string; label: string; childr
 
 function SectionHead({ k, title }: { k: string; title: string }) {
   return (
-    <div className="reveal mb-14">
+    <div className="reveal mb-8 sm:mb-14">
       <p className="font-mono text-xs tracking-[0.3em] text-accent">{k}</p>
-      <h2 className="mt-3 text-3xl font-semibold sm:text-5xl">{title}</h2>
+      <h2 className="mt-3 text-2xl font-semibold leading-tight sm:text-5xl">{title}</h2>
     </div>
   );
 }
@@ -227,10 +234,10 @@ function SectionHead({ k, title }: { k: string; title: string }) {
 function About() {
   const stats = [["4+", "Years in data engineering"], ["40%", "Efficiency gain via workflow automation"], ["4", "AWS & Google Cloud certifications"]];
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-32">
+    <section id="about" className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24 lg:py-32">
       <SectionHead k="// ABOUT" title="Data that's clean, governed and ready for AI." />
-      <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
-        <div className="reveal space-y-6 text-lg leading-relaxed text-muted-foreground">
+      <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+        <div className="reveal min-w-0 space-y-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <p>I'm a Data Engineer with 4+ years of experience and a Master's in Information Systems and Management. I design scalable ETL/ELT pipelines in Python, PySpark and SQL across AWS, Azure and Snowflake, with monitoring and security built in.</p>
           <p>Lately I've been building agentic AI on top of that foundation: a three-agent LangGraph copilot for healthcare prior authorization with citation-checked extraction using Claude, and a multi-agent data assistant that answers plain-English questions with safety-checked SQL on PostgreSQL.</p>
           <div className="flex flex-wrap gap-2 pt-2">
@@ -239,7 +246,7 @@ function About() {
         </div>
         <div className="reveal grid gap-4">
           {stats.map(([n, l]) => (
-            <div key={l} className="rounded-2xl glass p-6">
+            <div key={l} className="rounded-2xl glass p-5 sm:p-6">
               <div className="font-display text-4xl font-bold text-gradient">{n}</div>
               <div className="mt-1 text-sm text-muted-foreground">{l}</div>
             </div>
@@ -252,15 +259,15 @@ function About() {
 
 function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-32">
+    <section id="experience" className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24 lg:py-32">
       <SectionHead k="// EXPERIENCE" title="Where I've shipped." />
-      <ol className="relative space-y-10 border-l pl-8">
+      <ol className="relative space-y-10 border-l pl-5 sm:pl-8">
         {EXPERIENCE.map((e) => (
           <li key={e.company + e.when} className="reveal relative">
-            <span className="absolute -left-[37px] top-2 h-3 w-3 rounded-full bg-accent shadow-glow" />
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-2xl font-semibold">{e.company} <span className="text-base font-normal text-muted-foreground">· {e.role}</span></h3>
-              <span className="font-mono text-xs text-accent">{e.when}</span>
+            <span className="absolute -left-[27px] top-2 h-3 w-3 rounded-full bg-accent shadow-glow sm:-left-[37px]" />
+            <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-baseline">
+              <h3 className="min-w-0 text-xl font-semibold sm:text-2xl">{e.company} <span className="mt-1 block text-base font-normal text-muted-foreground sm:mt-0 sm:inline">· {e.role}</span></h3>
+              <span className="shrink-0 font-mono text-xs text-accent">{e.when}</span>
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{e.place}</p>
             <ul className="mt-4 space-y-2 text-muted-foreground">
@@ -275,13 +282,13 @@ function Experience() {
 
 function Education() {
   return (
-    <section id="education" className="mx-auto max-w-6xl px-6 py-32">
+    <section id="education" className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24 lg:py-32">
       <SectionHead k="// EDUCATION & CERTIFICATIONS" title="Credentials." />
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="reveal space-y-4 rounded-2xl glass p-7">
+        <div className="reveal min-w-0 space-y-4 rounded-2xl glass p-5 sm:p-7">
           {EDUCATION.map(([d, w]) => (<div key={d}><h3 className="font-semibold">{d}</h3><p className="text-sm text-muted-foreground">{w}</p></div>))}
         </div>
-        <ul className="reveal space-y-3 rounded-2xl glass p-7">
+        <ul className="reveal min-w-0 space-y-3 rounded-2xl glass p-5 sm:p-7">
           {CERTS.map((c) => (<li key={c} className="text-sm"><span className="text-accent">✓</span> {c}</li>))}
         </ul>
       </div>
@@ -291,17 +298,17 @@ function Education() {
 
 function Expertise() {
   return (
-    <section id="expertise" className="relative py-32">
+    <section id="expertise" className="relative py-16 sm:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 bg-glow opacity-60" />
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <SectionHead k="// CORE SKILLS" title="The stack behind the systems." />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {SKILLS.map((s, idx) => (
             <div key={s.title} style={{ transitionDelay: `${idx * 60}ms` }}
-              className={`reveal group rounded-2xl glass p-7 transition-shadow hover:shadow-glow ${idx === 0 ? "lg:col-span-2" : ""}`}>
-              <div className="flex items-baseline justify-between">
-                <h3 className="text-xl font-semibold">{s.title}</h3>
-                <span className="font-mono text-xs text-muted-foreground">{s.tag}</span>
+              className={`reveal group min-w-0 rounded-2xl glass p-5 transition-shadow hover:shadow-glow sm:p-7 ${idx === 0 ? "lg:col-span-2" : ""}`}>
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
+                <h3 className="min-w-0 text-lg font-semibold sm:text-xl">{s.title}</h3>
+                <span className="shrink-0 font-mono text-xs text-muted-foreground">{s.tag}</span>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
                 {s.items.map((t) => (
@@ -318,26 +325,25 @@ function Expertise() {
 
 function Focus() {
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-6 py-32">
+    <section id="projects" className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24 lg:py-32">
       <SectionHead k="// PROJECTS" title="Agentic AI, built carefully." />
-      <div className="grid gap-px overflow-hidden rounded-2xl border bg-border md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border bg-border md:grid-cols-2">
         {FOCUS.map((f, i) => (
-          <article key={f.title} className="reveal bg-background p-8 transition-colors hover:bg-card sm:p-10">
+          <article key={f.title} className="reveal flex min-w-0 flex-col bg-background p-5 transition-colors hover:bg-card sm:p-8 lg:p-10">
             <span className="font-mono text-xs text-accent">0{i + 1}</span>
-            <h3 className="mt-4 text-2xl font-semibold">{f.title}</h3>
+            <h3 className="mt-4 text-xl font-semibold leading-snug sm:text-2xl">{f.title}</h3>
             <p className="mt-4 leading-relaxed text-muted-foreground">{f.body}</p>
-            <div className="mt-6 flex gap-3 font-mono text-xs text-muted-foreground">
-              {f.stack.map((s) => <span key={s}>#{s}</span>)}
+            <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 font-mono text-xs text-muted-foreground">
+              {f.stack.map((s) => <span key={s} className="max-w-full break-words">#{s}</span>)}
             </div>
             {f.repo && (
-              <a
+              <Button asChild variant="link" className="mt-5 min-h-11 self-start whitespace-normal px-0 font-mono text-xs text-accent"><a
                 href={f.repo}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-accent underline-offset-4 transition-colors hover:underline"
               >
-                View the code <span aria-hidden="true">→</span>
-              </a>
+                View the code <ArrowRight aria-hidden="true" />
+              </a></Button>
             )}
           </article>
         ))}
@@ -353,25 +359,25 @@ function Contact() {
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
     window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent("Portfolio enquiry from " + form.name)}&body=${body}`;
   };
-  const input = "w-full rounded-xl border bg-input/30 px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring";
+  const input = "w-full min-w-0 rounded-xl border bg-input/30 px-4 py-3 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-ring";
   return (
-    <section id="contact" className="relative py-32">
+    <section id="contact" className="relative py-16 sm:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 bg-glow" />
-      <div className="relative mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-2">
-        <div className="reveal">
+      <div className="relative mx-auto grid max-w-6xl gap-8 px-5 sm:gap-12 sm:px-6 lg:grid-cols-2 lg:gap-16">
+        <div className="reveal min-w-0">
           <p className="font-mono text-xs tracking-[0.3em] text-accent">// CONTACT</p>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-5xl">Let's build something <span className="text-gradient">intelligent.</span></h2>
-          <p className="mt-6 max-w-md text-lg text-muted-foreground">Hiring for a data engineering or AI role? Reach me at {SITE.email} or {SITE.phone}.</p>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-5xl">Let's build something <span className="text-gradient">intelligent.</span></h2>
+          <p className="mt-6 max-w-md break-words text-base leading-relaxed text-muted-foreground sm:text-lg">Hiring for a data engineering or AI role? Reach me at {SITE.email} or {SITE.phone}.</p>
           <div className="mt-8 flex gap-3">
             <Social href={SITE.linkedin} label="LinkedIn"><LinkedInIcon /></Social>
             <Social href={SITE.github} label="GitHub"><GitHubIcon /></Social>
           </div>
         </div>
-        <form onSubmit={submit} className="reveal space-y-4 rounded-2xl glass p-8">
+        <form onSubmit={submit} className="reveal min-w-0 space-y-4 rounded-2xl glass p-5 sm:p-8">
           <input required placeholder="Your name" className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
           <input required type="email" placeholder="Email address" className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           <textarea required rows={5} placeholder="How can I help?" className={input} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
-          <button className="w-full rounded-full bg-gradient-brand py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">Send message</button>
+          <Button type="submit" className="h-auto min-h-12 w-full rounded-full bg-gradient-brand py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">Send message <ArrowRight aria-hidden="true" /></Button>
         </form>
       </div>
     </section>

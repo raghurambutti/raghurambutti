@@ -66,13 +66,14 @@
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 5rem; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; overflow-wrap: break-word; }
 }
 
 @utility text-gradient {
@@ -106,3 +107,9 @@
 @utility reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
 @utility revealed { opacity: 1 !important; transform: none !important; }
 @utility animate-rise { animation: rise .9s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-rise, .animate-flow, .animate-node, .animate-pulse { animation: none; }
+}
