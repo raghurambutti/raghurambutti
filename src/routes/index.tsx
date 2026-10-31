@@ -121,7 +121,7 @@ function NeuralField() {
         </linearGradient>
       </defs>
       {links.map(([a, b], i) => (
-        <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]}
+        <line key={i} x1={nodes[a]![0]} y1={nodes[a]![1]} x2={nodes[b]![0]} y2={nodes[b]![1]}
           stroke="url(#lg)" strokeWidth="1.2" strokeOpacity=".55" className="animate-flow"
           style={{ animationDelay: `${i * 0.15}s` }} />
       ))}
